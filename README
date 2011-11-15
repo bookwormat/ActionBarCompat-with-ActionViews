@@ -15,3 +15,16 @@ Just replace ActionBarHelperBase.java with my edited version. Then, if you provi
 One thing that I did not implement is MenuItem#getActionView(). This is the method that allows you to retrieve the ActionView from code.
 
 So if you want, for example, add a listener to your view in code, you have to search for it using Activity.findById(), after the actionBar has been created.
+
+
+e.g.
+
+
+View myCustomView = this.findViewById(R.id.mycustomview);
+        final Activity activity = this;
+        myCustomView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              /*...*/
+            }
+        });
