@@ -1,30 +1,58 @@
-ActionBar is a UI pattern that has found its way into the Android SDK in version 3.0 . If you want to support devices running Versions lower than 3.0, you need some code that falls back to an alternative implementation of the actionbar for devices running up to Android 2.3, and uses the existing one in 3.0 and above.
+This is not a complete project, but a modified version of a class that
+is part of ActionBarCompat:
+http://developer.android.com/resources/samples/ActionBarCompat/index.html. You
+need to get the source from this url and override
+ActionBarHelperBase.java with the file in this repository to make this
+work.
 
-There are various projects that do this. http://actionbarsherlock.com/ is a fully functional implementation that is, as far as I know, fully compatible with the 3.0 APIs. The only downside to actionbarsherlock is that the project is an extension to Google's Android Compability Library, which means you have to use Actionbarsherlock instead of the ACL. It's another dependency.
+=================================================================
 
-Google recommends a simpler, but also more restrictive solution: They offer a piece of sample code that they recommend you use in your project. They call it ActionBarCompat.
+ActionBar is a UI pattern that has found its way into the Android SDK
+in version 3.0 . If you want to support devices running Versions lower
+than 3.0, you need some code that falls back to an alternative
+implementation of the actionbar for devices running up to Android 2.3,
+and uses the existing one in 3.0 and above.
 
-One of the things that ActionBarCompat does not support is Adding an ActionView to the Actionbar in a phone device.
+There are various projects that do this. http://actionbarsherlock.com/
+is a fully functional implementation that is, as far as I know, fully
+compatible with the 3.0 APIs. The only downside to actionbarsherlock
+is that the project is an extension to Google's Android Compability
+Library, which means you have to use Actionbarsherlock instead of the
+ACL. It's another dependency.
 
-I need such an ActionView in my project, but other that that, ActionBarCompat works fine. Fortunately , the code from Google is not very complicated, and it is quite easy to add support for this.
+Google recommends a simpler, but also more restrictive solution: They
+offer a piece of sample code that they recommend you use in your
+project. They call it ActionBarCompat: http://developer.android.com/resources/samples/ActionBarCompat/index.html
 
-Just replace ActionBarHelperBase.java with my edited version. Then, if you provide the android:actionLayout attribute to your menu definition, the view in your layout will be added to the ActionBar instead of the icon.
+One of the things that ActionBarCompat does not support is Adding an
+ActionView to the Actionbar in a phone device.
+
+I need such an ActionView in my project, but other that that,
+ActionBarCompat works fine. Fortunately , the code from Google is not
+very complicated, and it is quite easy to add support for this.
+
+Just replace ActionBarHelperBase.java with my edited version. Then, if
+you provide the android:actionLayout attribute to your menu
+definition, the view in your layout will be added to the ActionBar
+instead of the icon.
 
 
 
-One thing that I did not implement is MenuItem#getActionView(). This is the method that allows you to retrieve the ActionView from code.
+One thing that I did not implement is MenuItem#getActionView(). This
+is the method that allows you to retrieve the ActionView from code.
 
-So if you want, for example, add a listener to your view in code, you have to search for it using Activity.findById(), after the actionBar has been created.
+So if you want, for example, add a listener to your view in code, you
+have to search for it using Activity.findById(), after the actionBar
+has been created.
 
 
 e.g.
 
 
 View myCustomView = this.findViewById(R.id.mycustomview);
-        final Activity activity = this;
-        myCustomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              /*...*/
-            }
-        });
+myCustomView.setOnClickListener(new OnClickListener() {
+  @Override
+  public void onClick(View v) {
+    /*...*/
+  }
+});
